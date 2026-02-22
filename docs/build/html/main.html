@@ -33,8 +33,92 @@
 
           <div class="body" role="main">
             
-  <section id="main-module">
-<h1>main module<a class="headerlink" href="#main-module" title="Link to this heading">¶</a></h1>
+  <section id="module-main">
+<span id="main-module"></span><h1>main module<a class="headerlink" href="#module-main" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.BibliotecaApp">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">BibliotecaApp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#BibliotecaApp"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.BibliotecaApp" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Window</span></code></p>
+<p>Clase que define la ventana principal de la aplicación de gestión de biblioteca.</p>
+<p>Esta clase hereda de Gtk.Window y se encarga de gestionar la interfaz de usuario
+y la interacción directa con la base de datos de libros.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="main.BibliotecaApp.actualizar_lista">
+<span class="sig-name descname"><span class="pre">actualizar_lista</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#BibliotecaApp.actualizar_lista"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.BibliotecaApp.actualizar_lista" title="Link to this definition">¶</a></dt>
+<dd><p>Consulta todos los registros de la tabla “libros” y refresca el TreeView.
+Limpia el modelo de datos y lo vuelve a cargar desde la base de datos.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.BibliotecaApp.amosar_dialogo">
+<span class="sig-name descname"><span class="pre">amosar_dialogo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tipo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mensaxe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#BibliotecaApp.amosar_dialogo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.BibliotecaApp.amosar_dialogo" title="Link to this definition">¶</a></dt>
+<dd><p>Muestra un diálogo de información o error al usuario.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tipo</strong> (<em>Gtk.MessageType</em>) – El tipo de mensaje de GTK (Info, Error, Warning).</p></li>
+<li><p><strong>mensaxe</strong> (<em>str</em>) – El texto del mensaje que se mostrará.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.BibliotecaApp.on_btn_borrar_clicked">
+<span class="sig-name descname"><span class="pre">on_btn_borrar_clicked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#BibliotecaApp.on_btn_borrar_clicked"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.BibliotecaApp.on_btn_borrar_clicked" title="Link to this definition">¶</a></dt>
+<dd><p>Elimina el libro seleccionado en el TreeView previa confirmación del usuario.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>widget</strong> (<em>Gtk.Button</em>) – El componente que dispara el evento.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.BibliotecaApp.on_btn_editar_clicked">
+<span class="sig-name descname"><span class="pre">on_btn_editar_clicked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#BibliotecaApp.on_btn_editar_clicked"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.BibliotecaApp.on_btn_editar_clicked" title="Link to this definition">¶</a></dt>
+<dd><p>Obtiene los datos del libro seleccionado y abre el diálogo de edición.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>widget</strong> (<em>Gtk.Button</em>) – El componente que dispara el evento.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.BibliotecaApp.on_btn_engadir_clicked">
+<span class="sig-name descname"><span class="pre">on_btn_engadir_clicked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#BibliotecaApp.on_btn_engadir_clicked"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.BibliotecaApp.on_btn_engadir_clicked" title="Link to this definition">¶</a></dt>
+<dd><p>Manejador del evento de clic en el botón guardar. Inserta un nuevo libro en la base de datos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>widget</strong> (<em>Gtk.Button</em>) – El componente que dispara el evento.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="main.EdicionDialog">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">EdicionDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#EdicionDialog"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.EdicionDialog" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialog</span></code></p>
+<p>Clase que define un cuadro de diálogo para la edición de registros de libros.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="main.EdicionDialog.get_datos">
+<span class="sig-name descname"><span class="pre">get_datos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#EdicionDialog.get_datos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.EdicionDialog.get_datos" title="Link to this definition">¶</a></dt>
+<dd><p>Recupera los valores introducidos por el usuario en los campos del diálogo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lista con el nuevo título, autor y género.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 

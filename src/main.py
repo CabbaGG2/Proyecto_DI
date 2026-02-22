@@ -1,4 +1,3 @@
-gi.require_version('Gtk', '3.0')
 import gi
 try:
     # Esto evita que la documentación falle si no encuentra GTK
