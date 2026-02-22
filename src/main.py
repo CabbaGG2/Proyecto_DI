@@ -1,8 +1,13 @@
-import gi
-import os
-
 gi.require_version('Gtk', '3.0')
+import gi
+try:
+    # Esto evita que la documentación falle si no encuentra GTK
+    gi.require_version('Gtk', '3.0')
+except (AttributeError, NameError, ValueError):
+    pass
+
 from gi.repository import Gtk, Pango
+import os
 from conexionBD import ConexionBD
 
 
