@@ -7,8 +7,7 @@ except (AttributeError, NameError, ValueError):
 
 from gi.repository import Gtk, Pango
 import os
-from conexionBD import ConexionBD
-
+from libreria_CabbaGG.conexionBD import ConexionBD
 
 class BibliotecaApp(Gtk.Window):
     """
@@ -24,6 +23,9 @@ class BibliotecaApp(Gtk.Window):
         inicial con la base de datos, asegurando la existencia de las tablas.
         """
         super().__init__(title="Gestión de Biblioteca Municipal")
+
+        self.connect("destroy", Gtk.main_quit)
+
         self.set_default_size(800, 600)
         self.set_border_width(10)
 
@@ -223,6 +225,13 @@ class BibliotecaApp(Gtk.Window):
             res = dialogo.run()
             if res == Gtk.ResponseType.OK:
                 novos_datos = dialogo.get_datos()
+                #tengo que meter aqui las comprobaciones de valores vacios
+                if(novos_datos[0] == "" or novos_datos[1] == ""):
+                    confirm = Gtk.MessageDialog(transient_for=self, flags=0, message_type=Gtk.MessageType.ERROR,
+                                                buttons=Gtk.ButtonsType.OK,
+                                                text="No puede entrar un Autor o Libro vacio")
+                    confirm.run()
+                    confirm.destroy()
                 conn = self.db.conectaBD()
                 cursor = conn.cursor()
                 cursor.execute("UPDATE libros SET titulo=?, autor=?, xenero=? WHERE id=?",
@@ -272,7 +281,9 @@ class EdicionDialog(Gtk.Dialog):
         """
         return [self.ent_t.get_text(), self.ent_a.get_text(), self.ent_x.get_text()]
 
-
-if __name__ == "__main__":
+def main():
     app = BibliotecaApp()
     Gtk.main()
+
+if __name__ == "__main__":
+    main()

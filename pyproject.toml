@@ -1,0 +1,29 @@
+[project]
+name = "libreria_CabbaGG"
+version = "3.0"
+authors = [
+    {name = "Jose Camara", email = "jcamara@danielcastelao.org"},
+    {name = "otro", email = "otro@gmail.com"}
+]
+
+description = "Pequeña aplicación que gestiona una librería a traves de una base de datos Sqlite"
+readme = "README.md"
+requires-python = ">=3.1"
+dependencies = [
+     "PyGObject",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/CabbaGG2/Proyecto_DI"
+
+#Aqui podemos escribir tantas maneras de lanzar la aplicacion como queramos
+#Asi enlazamos el lanzador con el main.py
+[project.scripts]
+gestor = "libreria_CabbaGG.main:main"
