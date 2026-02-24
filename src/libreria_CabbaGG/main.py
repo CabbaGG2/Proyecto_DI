@@ -222,22 +222,44 @@ class BibliotecaApp(Gtk.Window):
         if treeiter is not None:
             datos = list(model[treeiter])
             dialogo = EdicionDialog(self, datos)
-            res = dialogo.run()
-            if res == Gtk.ResponseType.OK:
-                novos_datos = dialogo.get_datos()
-                #tengo que meter aqui las comprobaciones de valores vacios
-                if(novos_datos[0] == "" or novos_datos[1] == ""):
-                    confirm = Gtk.MessageDialog(transient_for=self, flags=0, message_type=Gtk.MessageType.ERROR,
-                                                buttons=Gtk.ButtonsType.OK,
-                                                text="No puede entrar un Autor o Libro vacio")
-                    confirm.run()
-                    confirm.destroy()
-                conn = self.db.conectaBD()
-                cursor = conn.cursor()
-                cursor.execute("UPDATE libros SET titulo=?, autor=?, xenero=? WHERE id=?",
-                               (novos_datos[0], novos_datos[1], novos_datos[2], datos[0]))
-                conn.commit()
-                self.actualizar_lista()
+            # Iniciamos un bucle para validar antes de cerrar definitivamente
+            while True:
+                res = dialogo.run()
+
+                if res == Gtk.ResponseType.OK:
+                    novos_datos = dialogo.get_datos()
+
+                    # Validación de campos vacíos
+                    if not novos_datos[0].strip() or not novos_datos[1].strip():
+                        error_dialog = Gtk.MessageDialog(
+                            transient_for=dialogo,  # Importante: el padre es el diálogo de edición
+                            modal=True,
+                            message_type=Gtk.MessageType.ERROR,
+                            buttons=Gtk.ButtonsType.OK,
+                            text="Error de validación",
+                            secondary_text="El título y el autor no pueden estar vacíos."
+                        )
+                        error_dialog.run()
+                        error_dialog.destroy()
+                        # No salimos del bucle, por lo que dialogo.run() se ejecutará de nuevo
+                        continue
+
+                        # Si pasa la validación, guardamos en BD
+                    try:
+                        conn = self.db.conectaBD()
+                        cursor = conn.cursor()
+                        cursor.execute("UPDATE libros SET titulo=?, autor=?, xenero=? WHERE id=?",
+                                       (novos_datos[0], novos_datos[1], novos_datos[2], datos[0]))
+                        conn.commit()
+                        self.actualizar_lista()
+                        break  # Salimos del bucle while porque todo salió bien
+                    except Exception as e:
+                        print(f"Error en la base de datos: {e}")
+                        break
+                else:
+                    # Si el usuario pulsa Cancelar o cierra la ventana
+                    break
+
             dialogo.destroy()
 
 

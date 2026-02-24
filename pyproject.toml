@@ -1,6 +1,6 @@
 [project]
 name = "libreria_CabbaGG"
-version = "3.0"
+version = "4.0"
 authors = [
     {name = "Jose Camara", email = "jcamara@danielcastelao.org"},
     {name = "otro", email = "otro@gmail.com"}
