@@ -248,8 +248,8 @@ class BibliotecaApp(Gtk.Window):
                     try:
                         conn = self.db.conectaBD()
                         cursor = conn.cursor()
-                        cursor.execute("UPDATE libros SET titulo=?, autor=?, xenero=? WHERE id=?",
-                                       (novos_datos[0], novos_datos[1], novos_datos[2], datos[0]))
+                        cursor.execute("UPDATE libros SET titulo=?, autor=?, xenero=?, disponible=? WHERE id=?",
+                                       (novos_datos[0], novos_datos[1], novos_datos[2],novos_datos[3], datos[0]))
                         conn.commit()
                         self.actualizar_lista()
                         break  # Salimos del bucle while porque todo salió bien
@@ -305,12 +305,27 @@ class EdicionDialog(Gtk.Dialog):
         else:
             self.combo_xenero.set_active(0)
 
+        self.radio_si = Gtk.RadioButton.new_with_label(None, "Sí")
+        self.radio_no = Gtk.RadioButton.new_with_label_from_widget(self.radio_si, "No")
+
+        # Marcamos el estado actual (datos[4] es el booleano de disponibilidad)
+        if datos[4]:
+            self.radio_si.set_active(True)
+        else:
+            self.radio_no.set_active(True)
+
+        box_radio = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        box_radio.pack_start(self.radio_si, False, False, 0)
+        box_radio.pack_start(self.radio_no, False, False, 0)
+
         box.add(Gtk.Label(label="Nuevo Título:", xalign=0))
         box.add(self.ent_t)
         box.add(Gtk.Label(label="Nuevo Autor:", xalign=0))
         box.add(self.ent_a)
         box.add(Gtk.Label(label="Nuevo Género:", xalign=0))
         box.add(self.combo_xenero)
+        box.add(Gtk.Label(label="Disponible?:", xalign=0))
+        box.add(box_radio)
         self.show_all()
 
     def get_datos(self):
@@ -320,7 +335,8 @@ class EdicionDialog(Gtk.Dialog):
         :return: Lista con el nuevo título, autor y género.
         :rtype: list
         """
-        return [self.ent_t.get_text(), self.ent_a.get_text(), self.combo_xenero.get_active_text()]
+        disponible = 1 if self.radio_si.get_active() else 0
+        return [self.ent_t.get_text(), self.ent_a.get_text(), self.combo_xenero.get_active_text(), disponible]
 
 def main():
     app = BibliotecaApp()
