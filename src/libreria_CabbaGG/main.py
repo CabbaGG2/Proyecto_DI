@@ -281,17 +281,36 @@ class EdicionDialog(Gtk.Dialog):
         self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
         self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
 
+        # Dimensiones de la ventana de edicion
+        self.set_default_size(250, -1)
+        box = self.get_content_area()
+        box.set_spacing(10)
+        box.set_margin_start(15)
+        box.set_margin_end(15)
+        box.set_margin_top(15)
+        box.set_margin_bottom(15)
+
         box = self.get_content_area()
         self.ent_t = Gtk.Entry(text=datos[1])
         self.ent_a = Gtk.Entry(text=datos[2])
-        self.ent_x = Gtk.Entry(text=datos[3])
 
-        box.add(Gtk.Label(label="Nuevo Título:"))
+        self.combo_xenero = Gtk.ComboBoxText()
+        generos = ["Narrativa", "Poesía", "Ensayo", "Ciencia Ficción"]
+        for g in generos:
+            self.combo_xenero.append_text(g)
+
+        # Seleccionar el género actual del libro
+        if datos[3] in generos:
+            self.combo_xenero.set_active(generos.index(datos[3]))
+        else:
+            self.combo_xenero.set_active(0)
+
+        box.add(Gtk.Label(label="Nuevo Título:", xalign=0))
         box.add(self.ent_t)
-        box.add(Gtk.Label(label="Nuevo Autor:"))
+        box.add(Gtk.Label(label="Nuevo Autor:", xalign=0))
         box.add(self.ent_a)
-        box.add(Gtk.Label(label="Nuevo Género:"))
-        box.add(self.ent_x)
+        box.add(Gtk.Label(label="Nuevo Género:", xalign=0))
+        box.add(self.combo_xenero)
         self.show_all()
 
     def get_datos(self):
@@ -301,7 +320,7 @@ class EdicionDialog(Gtk.Dialog):
         :return: Lista con el nuevo título, autor y género.
         :rtype: list
         """
-        return [self.ent_t.get_text(), self.ent_a.get_text(), self.ent_x.get_text()]
+        return [self.ent_t.get_text(), self.ent_a.get_text(), self.combo_xenero.get_active_text()]
 
 def main():
     app = BibliotecaApp()
