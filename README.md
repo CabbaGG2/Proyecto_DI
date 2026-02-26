@@ -34,7 +34,7 @@ Para ejecutar el proyecto en un entorno Windows bajo MinGW64, es necesario insta
    `pacman -S mingw-w64-x86_64-python-gobject mingw-w64-x86_64-gtk3`
 
 2. Ejecución de la aplicación:
-   `python src/main.py`
+   `python src/libreria_CabbaGG/main.py`
 
 ## Generación de Documentación
 
